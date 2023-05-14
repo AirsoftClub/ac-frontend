@@ -6,6 +6,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { useState } from "react";
 import { QueryClient, Hydrate, QueryClientProvider } from "react-query";
+import { Navbar } from "@/components/Navbar/Navbar";
 
 export default function App({
   Component,
@@ -17,6 +18,7 @@ export default function App({
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <SessionProvider session={session}>
+          <Navbar />
           <Component {...pageProps} />
         </SessionProvider>
       </Hydrate>

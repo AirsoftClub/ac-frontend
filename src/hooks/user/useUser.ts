@@ -5,7 +5,8 @@ import { useQuery } from "react-query";
 
 export const getUser = async (hookRequest?: IHookRequest<{}>) => {
   const axiosInstance = getAxiosInstance(hookRequest?.context);
-  return await axiosInstance.get<IUser>("/user/me");
+  const response = await axiosInstance.get<IUser>("/user/me");
+  return response.data;
 };
 
 export const useUser = (hookRequest?: IHookRequest<{}>) =>

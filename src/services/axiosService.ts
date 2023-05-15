@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import { GetServerSidePropsContext } from "next";
-import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 
 export const getAxiosInstance = (

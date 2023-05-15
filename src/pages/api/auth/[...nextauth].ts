@@ -21,6 +21,7 @@ export const authOptions: AuthOptions = {
 
         token.accessToken = response.data.access_token;
         token.refreshToken = response.data.refresh_token;
+        token.expiresAt = response.data.expires_at;
 
         return token;
       }
@@ -30,6 +31,23 @@ export const authOptions: AuthOptions = {
     async session({ session, user, token }) {
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
+      session.user.expiresAt = token.expiresAt;
+
+      if (Date.now() > (session.user.expiresAt ?? Infinity)) {
+        const axiosInstance = getAxiosInstance();
+        const response = await axiosInstance.post(
+          "/auth/refresh",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.refreshToken}`,
+            },
+          }
+        );
+        session.user.accessToken = response.data.access_token;
+        session.user.expiresAt = response.data.expires_at;
+      }
+
       return session;
     },
   },

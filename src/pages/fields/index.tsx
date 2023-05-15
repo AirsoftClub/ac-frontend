@@ -1,5 +1,5 @@
 import { getFields, useFields } from "@/hooks/fields/useFields";
-import { IField } from "@/interfaces/IField";
+import { Field } from "@/models/IField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -27,7 +27,7 @@ export const getServerSideProps = async (
   };
 };
 
-const FieldCard = (field: IField) => {
+const FieldCard = (field: Field) => {
   return (
     <Card key={field.name}>
       <CardHeader

@@ -1,11 +1,11 @@
+import { TagChips } from "@/components/tags/TagChips";
 import { getFields, useFields } from "@/hooks/fields/useFields";
-import { Field } from "@/models/IField";
+import { Field } from "@/models/Field";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -29,16 +29,10 @@ export const getServerSideProps = async (
 
 const FieldCard = (field: Field) => {
   return (
-    <Card key={field.name}>
+    <Card key={field.id}>
       <CardHeader
         title={field.name}
-        subheader={
-          <Stack spacing={1} direction="row">
-            {field.tags.map((tag) => (
-              <Chip key={tag.id} label={tag.description} size="small" />
-            ))}
-          </Stack>
-        }
+        subheader={<TagChips tags={field.tags} />}
       />
 
       <CardContent>
@@ -46,6 +40,9 @@ const FieldCard = (field: Field) => {
       </CardContent>
 
       <CardActions>
+        <Button variant="text" href={`/fields/${field.id}`}>
+          Detalles
+        </Button>
         <Button variant="text">Partidas</Button>
         <Button variant="text">Fotos</Button>
       </CardActions>

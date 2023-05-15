@@ -1,11 +1,11 @@
 import { getFields, useFields } from "@/hooks/fields/useFields";
 import { IField } from "@/interfaces/IField";
-import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
+import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -16,8 +16,8 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const queryClient = new QueryClient();
-  queryClient.prefetchQuery(
-    ["fields"],
+  await queryClient.prefetchQuery(
+    "fields",
     async () => await getFields({ context })
   );
   return {
@@ -29,13 +29,13 @@ export const getServerSideProps = async (
 
 const FieldCard = (field: IField) => {
   return (
-    <Card>
+    <Card key={field.name}>
       <CardHeader
         title={field.name}
         subheader={
           <Stack spacing={1} direction="row">
             {field.tags.map((tag) => (
-              <Chip label={tag.description} size="small" />
+              <Chip key={tag.id} label={tag.description} size="small" />
             ))}
           </Stack>
         }
@@ -54,11 +54,7 @@ const FieldCard = (field: IField) => {
 };
 
 export default () => {
-  const { data: fields, isLoading } = useFields();
-
-  if (isLoading) {
-    return "Is Loading";
-  }
+  const { data: fields } = useFields();
 
   if (!fields) return;
 

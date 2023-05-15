@@ -1,23 +1,18 @@
 "use client";
 
-import Button from "@mui/material/Button";
 import GoogleIcon from "@mui/icons-material/Google";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Session } from "next-auth";
+import { Avatar, Button, Menu, Stack } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import { useRef, useState } from "react";
-import { Avatar, Menu, Stack } from "@mui/material";
+import { Session } from "next-auth";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useState } from "react";
 
 const GuestActions = () => {
   return (
     <div>
-      <Button
-        sx={{ textTransform: "none" }}
-        variant="contained"
-        onClick={() => signIn("google")}
-      >
-        <GoogleIcon sx={{ marginRight: 1 }} />
-        Iniciar sesion con Google
+      <Button onClick={() => signIn("google")} sx={{ textTransform: "none" }}>
+        <GoogleIcon sx={{ marginRight: 1 }} color="info" />
+        Sign In
       </Button>
     </div>
   );
@@ -42,17 +37,9 @@ const AuthActions = ({ session }: { session: Session }) => {
         alt={session.user.name ?? ""}
         src={session.user.image ?? ""}
       ></Avatar>
-      <Menu
-        id="basic-menu"
-        anchorEl={avatarEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
+      <Menu anchorEl={avatarEl} open={open} onClose={handleClose}>
         <MenuItem>Perfil</MenuItem>
-        <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+        <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
       </Menu>
     </Stack>
   );

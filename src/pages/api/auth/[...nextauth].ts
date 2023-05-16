@@ -11,9 +11,8 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, account, profile, trigger }) {
-      const axiosInstance = getAxiosInstance();
-
       if (account) {
+        const axiosInstance = getAxiosInstance();
         const response = await axiosInstance.post("/auth/register", {
           token: account?.access_token,
           provider: account?.provider,

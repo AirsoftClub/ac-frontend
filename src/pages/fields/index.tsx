@@ -1,4 +1,4 @@
-import { TagChips } from "@/components/tags/TagChips";
+import { TagChips } from "@/components/Tags/TagChips";
 import { getFields, useFields } from "@/hooks/fields/useFields";
 import { Field } from "@/models/Field";
 import Button from "@mui/material/Button";

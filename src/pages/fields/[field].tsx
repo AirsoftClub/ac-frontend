@@ -1,14 +1,6 @@
-import { TagChips } from "@/components/Tags/TagChips";
+import { FieldCard } from "@/components/fields/FieldCard";
 import { getField, useField } from "@/hooks/fields/useField";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Container } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { QueryClient, dehydrate } from "react-query";
@@ -45,18 +37,11 @@ export default () => {
   const payload = { id: fieldId };
   const { data: field } = useField({ payload });
 
+  if (!field) return <>Field does not exists</>;
+
   return (
     <Container>
-      <Card>
-        <CardHeader title={field?.name} />
-        <CardContent>
-          <Typography variant="body1">{field?.description}</Typography>
-          <TagChips tags={field?.tags ?? []} />
-        </CardContent>
-        <CardActions>
-          <Button variant="text">Partidas</Button>
-        </CardActions>
-      </Card>
+      <FieldCard field={field} />
     </Container>
   );
 };

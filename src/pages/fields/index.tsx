@@ -29,7 +29,7 @@ export default () => {
     <Container>
       <Stack spacing={2}>
         {fields.map((field) => (
-          <FieldCard field={field} />
+          <FieldCard key={field.id} field={field} />
         ))}
       </Stack>
     </Container>

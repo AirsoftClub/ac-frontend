@@ -22,7 +22,7 @@ export const getServerSideProps = async (
     };
   }
 
-  queryClient.setQueryData(`field-${fieldId}`, field);
+  queryClient.setQueryData(["fields", payload.id], field);
 
   return {
     props: {

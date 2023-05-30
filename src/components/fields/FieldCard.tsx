@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { TagChips } from "../tags/TagChips";
+import Link from "next/link";
 
 interface FieldCardProps {
   field: Field;
@@ -22,9 +23,9 @@ export const FieldCard = ({ field }: FieldCardProps) => (
     </CardContent>
 
     <CardActions>
-      <Button variant="text" href={`/fields/${field.id}`}>
-        Detalles
-      </Button>
+      <Link href={`/fields/${field.id}`}>
+        <Button variant="text">Detalles</Button>
+      </Link>
       <Button variant="text">Partidas</Button>
       <Button variant="text">Fotos</Button>
     </CardActions>

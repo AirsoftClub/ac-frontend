@@ -18,6 +18,6 @@ export const getField = async ({
 
 export const useField = ({ context, payload }: IHookRequest<GetFieldPayload>) =>
   useQuery(
-    `field-${payload?.id}`,
+    ["fields", payload?.id],
     async () => await getField({ context, payload })
   );

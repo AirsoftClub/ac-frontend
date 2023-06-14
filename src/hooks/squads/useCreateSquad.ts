@@ -4,7 +4,6 @@ import { useMutation } from "react-query";
 
 interface CreateSquadPayload {
   name: string;
-  emblem: string;
 }
 
 export const createSquad = async ({

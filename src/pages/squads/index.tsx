@@ -1,3 +1,4 @@
+import { CreateSquadModal } from "@/components/squads/CreateSquadModal";
 import { getSquads, useSquads } from "@/hooks/squads/useSquads";
 import { Avatar } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -25,12 +26,10 @@ const Squads = () => {
   const { data: squads } = useSquads();
 
   return (
-    <Grid container sm={12}>
+    <Grid container>
       <Grid item sm={12}>
         <Toolbar>
-          <Link href="/squads/create">
-            <Button variant="contained">Crear escuadra</Button>
-          </Link>
+          <CreateSquadModal />
         </Toolbar>
       </Grid>
       {squads?.map((squad) => (
